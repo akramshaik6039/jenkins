@@ -1,4 +1,10 @@
-FROM ubuntu:latest
-LABEL authors="HP"
+FROM eclipse-temurin:17-jdk-alpine
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+# Copy the jar built by Maven into the container
+COPY target/jenkins-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8082
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
